@@ -48,7 +48,7 @@ function normalizeCase(row){
     title: row["案例摘要"] || "",
     drug: row["主搜尋藥物"] || "",
     fullText: row["原始全文"] || "僅記錄特殊處方用途，無補充內容。",
-    imageFiles: parseList(row["圖片檔名"] || row["圖片網址"] || ""),
+    imageFiles: parseList(row["圖片ID"] || row["圖片檔名"] || row["圖片網址"] || ""),
     refs: row["參考資料"] || "",
     category: row["分類"] || "",
     keywords: parseList(row["關鍵字"])
