@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>特殊處方資料庫 v4.0</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Special Prescription Database v4.0</p>
+      <h1>特殊處方資料庫</h1>
+      <p class="subtitle">Google Sheet 儲存案例，GitHub images 資料夾儲存圖片</p>
+    </div>
+    <div class="stat-card">
+      <span id="totalCount">0</span>
+      <small>筆案例</small>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <label>搜尋</label>
+      <input id="searchInput" type="search" placeholder="藥品、病歷號、案例ID、關鍵字..." />
+
+      <label>分類</label>
+      <select id="categoryFilter">
+        <option value="">全部分類</option>
+      </select>
+
+      <div class="actions">
+        <button id="clearBtn">清除搜尋</button>
+        <button id="refreshBtn">重新載入</button>
+        <button id="openAddBtn" class="primary">新增案例</button>
+      </div>
+
+      <div class="hint">
+        圖片做法：新增/編輯時選圖片，網站會幫你重新命名並下載。接著把圖片上傳到 GitHub 的 images 資料夾。
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="toolbar">
+        <h2>案例列表</h2>
+        <span id="resultCount">讀取中...</span>
+      </div>
+      <div id="caseList" class="case-list"></div>
+    </section>
+  </main>
+
+  <dialog id="caseDialog">
+    <article class="modal">
+      <button id="closeDialog" class="close">×</button>
+      <div id="modalContent"></div>
+    </article>
+  </dialog>
+
+  <dialog id="addDialog">
+    <article class="modal">
+      <button id="closeAddDialog" class="close">×</button>
+      <h2>新增案例</h2>
+      <p class="muted">文字會寫入 Google Sheet。圖片請下載後上傳到 GitHub 的 images 資料夾。</p>
+      <form id="caseForm" class="form">
+        <input name="caseId" placeholder="案例ID（新增時可留空，自動產生）" />
+        <input name="id" placeholder="病歷號" required />
+        <input name="title" placeholder="案例摘要" required />
+        <input name="drug" placeholder="主搜尋藥物" required />
+        <textarea name="fullText" placeholder="原始全文，不需重複標題與病歷號" rows="7" required></textarea>
+        <input name="refs" placeholder="參考資料" />
+        <input name="category" placeholder="分類" />
+        <input name="keywords" placeholder="關鍵字，請用逗號或頓號分隔" />
+
+        <label class="upload-box">
+          選擇圖片（會自動重新命名並下載）
+          <input name="images" type="file" accept="image/*" multiple />
+        </label>
+
+        <label>圖片檔名</label>
+        <textarea name="imageFiles" placeholder="例如：RX000001_1.jpg, RX000001_2.jpg" rows="3"></textarea>
+
+        <div id="imagePrepareBox" class="image-prepare"></div>
+
+        <button class="primary" type="submit">儲存案例</button>
+      </form>
+    </article>
+  </dialog>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzmV0HYBCEiovBUMt-At6YV4k_OXGk_rhjpnFUxN97Xnqbh3dY1xNaLd-1o7PF85kSHqw/exec";
+    const API_KEY = "special_rx_2026";
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
